@@ -15,6 +15,7 @@
     <!-- Sessions without code (only README files) are not modules -->
     <modules>
         <module>session-01-java-architecture-oop</module>
+        <module>session-02-advanced-java</module>
         <module>session-03-functional-programming-collections</module>
         <module>session-05-concurrency</module>
     </modules>
