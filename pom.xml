@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Java fundamentals practice project: plain Java 17, JUnit + AssertJ for the tests. Build with ./mvnw verify -->
+<!-- Parent of the course: one Maven module per session that has code. It holds the shared Java
+     version, dependency versions, compiler and test settings. Build everything with ./mvnw verify -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -8,7 +9,15 @@
     <groupId>io.github.niranjankagri</groupId>
     <artifactId>java-backend-development</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>Java Backend Development - core Java exercises</name>
+    <packaging>pom</packaging>
+    <name>Java Backend Development - Spring Boot, Microservices with AI</name>
+
+    <!-- Sessions without code (only README files) are not modules -->
+    <modules>
+        <module>session-01-java-architecture-oop</module>
+        <module>session-03-functional-programming-collections</module>
+        <module>session-05-concurrency</module>
+    </modules>
 
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
