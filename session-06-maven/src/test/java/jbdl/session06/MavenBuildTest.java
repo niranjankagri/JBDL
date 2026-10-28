@@ -6,6 +6,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests that only pass because Maven did its job: process-resources filtered the POM's values into
+ * build-info.properties, and the compile-scope dependency was downloaded and put on the classpath.
+ */
 class MavenBuildTest {
 
     @Test

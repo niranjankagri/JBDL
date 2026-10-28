@@ -13,6 +13,7 @@ public record BuildInfo(String group, String artifact, String version, String ja
 
     public static BuildInfo load() {
         Properties properties = new Properties();
+        // a leading "/" means the root of the classpath, i.e. target/classes or the root of the jar
         try (InputStream in = BuildInfo.class.getResourceAsStream("/build-info.properties")) {
             if (in == null) {
                 throw new IllegalStateException("build-info.properties is not on the classpath");
