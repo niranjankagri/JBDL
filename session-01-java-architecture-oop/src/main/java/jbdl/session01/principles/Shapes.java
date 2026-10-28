@@ -38,7 +38,9 @@ public final class Shapes {
     /** Prints each shape, the total, and which overload the compiler picked for each call. */
     public static void main(String[] args) {
         List<Shape> shapes = List.of(new Circle(1), new Rectangle(2, 3), new Square(2));
-        shapes.forEach(shape -> System.out.println(shape.describe()));
+        for (Shape shape : shapes) {
+            System.out.println(shape.describe());
+        }
         System.out.printf(Locale.ROOT, "Total area: %.2f%n", totalArea(shapes));
 
         Shape someShape = new Circle(1);

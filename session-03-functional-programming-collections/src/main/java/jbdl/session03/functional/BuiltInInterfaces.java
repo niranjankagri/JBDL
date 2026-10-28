@@ -27,6 +27,7 @@ public final class BuiltInInterfaces {
     public static final UnaryOperator<String> TRIM_AND_LOWER = text -> text.trim().toLowerCase();
 
     /** BinaryOperator<T>: a BiFunction with all three types the same; what reduce() takes. */
+    // Same as: (a, b) -> a >= b ? a : b   (maxBy builds it from a comparator)
     public static final BinaryOperator<Integer> LARGER = BinaryOperator.maxBy(Integer::compare);
 
     /** IntPredicate: Predicate<Integer> without boxing every int into an Integer object. */
@@ -42,6 +43,9 @@ public final class BuiltInInterfaces {
 
     /** reduce with a BinaryOperator: the largest number, or the identity for an empty list. */
     public static int largest(List<Integer> numbers) {
+        // reduce combines all elements two at a time, starting from MIN_VALUE. The same as a loop:
+        //   int largest = Integer.MIN_VALUE;
+        //   for (int n : numbers) { largest = LARGER.apply(largest, n); }
         return numbers.stream().reduce(Integer.MIN_VALUE, LARGER);
     }
 }

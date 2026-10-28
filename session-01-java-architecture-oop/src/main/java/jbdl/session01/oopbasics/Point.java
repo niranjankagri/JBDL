@@ -31,6 +31,8 @@ public final class Point {
         if (this == other) {
             return true;
         }
+        // "instanceof Point point" (Java 16+) checks the type AND creates the variable `point`.
+        // Older form: if (!(other instanceof Point)) { return false; }  Point point = (Point) other;
         if (!(other instanceof Point point)) {
             return false;
         }

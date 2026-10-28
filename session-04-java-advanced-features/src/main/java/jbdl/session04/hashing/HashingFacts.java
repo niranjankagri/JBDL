@@ -29,6 +29,7 @@ public final class HashingFacts {
 
         @Override
         public boolean equals(Object other) {
+            // instanceof with a variable (Java 16+); && only runs the right side if the left is true
             return other instanceof BadKey key && key.name.equals(name);
         }
     }

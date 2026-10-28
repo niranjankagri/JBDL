@@ -19,6 +19,7 @@ public final class ParallelStreams {
 
     public static long sumOfSquares(int n, boolean parallel) {
         LongStream numbers = LongStream.rangeClosed(1, n);
+        // (parallel ? A : B) picks the parallel or the plain stream; the rest is the same pipeline
         return (parallel ? numbers.parallel() : numbers).map(x -> x * x).sum();
     }
 

@@ -28,7 +28,12 @@ public final class CollectionExamples {
     private CollectionExamples() {
     }
 
-    /** ArrayList (array) and LinkedList (linked nodes) both keep insertion order and duplicates. */
+    /**
+     * ArrayList (array) and LinkedList (linked nodes) both keep insertion order and duplicates.
+     * The Supplier parameter lets the caller choose the list type: fillList(ArrayList::new, ...) means
+     * "create a new ArrayList" (a constructor reference, Session 3 topic 1). Without it we'd need one
+     * method per type: fillArrayList(...), fillLinkedList(...)...
+     */
     public static List<Integer> fillList(Supplier<List<Integer>> listType, int... values) {
         return fill(listType.get(), values);
     }

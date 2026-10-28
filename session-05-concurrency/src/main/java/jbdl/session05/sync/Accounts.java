@@ -31,8 +31,16 @@ public final class Accounts {
 
     /** Moves money atomically: both accounts are locked, always the lower id first. */
     public static void transfer(Account from, Account to, long amount) {
-        Account first = from.id < to.id ? from : to;   // lock ordering prevents deadlock
-        Account second = from.id < to.id ? to : from;
+        // lock ordering prevents deadlock: always lock the account with the lower id first
+        Account first;
+        Account second;
+        if (from.id < to.id) {
+            first = from;
+            second = to;
+        } else {
+            first = to;
+            second = from;
+        }
         synchronized (first) {
             synchronized (second) {
                 if (from.balance < amount) {

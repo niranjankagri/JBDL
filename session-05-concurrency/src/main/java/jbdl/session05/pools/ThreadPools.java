@@ -55,6 +55,8 @@ public final class ThreadPools {
         List<Thread> threads = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             int index = i;
+            // the lambda is the thread's run() method; it may use `index` because index is effectively
+            // final (a new variable per loop turn), while the loop variable i changes and couldn't be used
             Thread thread = new Thread(() -> results[index] = index * index);
             threads.add(thread);
             thread.start();

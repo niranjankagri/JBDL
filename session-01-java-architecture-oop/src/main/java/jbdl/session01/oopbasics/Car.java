@@ -32,6 +32,7 @@ public final class Car {
 
     /** One line about the drive train, e.g. "The car uses Petrol and is manual." */
     public String getInfo() {
+        // condition ? valueIfTrue : valueIfFalse  (the ternary operator) is a short if/else for values
         return "The car uses " + fuelType + " and is " + (automatic ? "automatic" : "manual") + ".";
     }
 

@@ -38,6 +38,13 @@ public final class OrderReports {
 
     /** groupingBy with a downstream collector: revenue per city, cities sorted (TreeMap). */
     public static Map<String, Long> revenueByCity(List<Order> orders) {
+        // Same with a loop:
+        //   Map<String, Long> result = new TreeMap<>();
+        //   for (Order order : orders) {
+        //       if (order.status() != Order.Status.CANCELLED) {
+        //           result.merge(order.city(), order.total(), Long::sum);   // add to the city's total
+        //       }
+        //   }
         return orders.stream()
                 .filter(order -> order.status() != Order.Status.CANCELLED)
                 .collect(Collectors.groupingBy(Order::city, TreeMap::new, Collectors.summingLong(Order::total)));
@@ -45,17 +52,25 @@ public final class OrderReports {
 
     /** groupingBy + counting: how many orders in each status. */
     public static Map<Order.Status, Long> countByStatus(List<Order> orders) {
+        // Same with a loop: for each order, counts.merge(order.status(), 1L, Long::sum)
         return orders.stream().collect(Collectors.groupingBy(Order::status, Collectors.counting()));
     }
 
     /** partitioningBy: always two groups, true and false. */
     public static Map<Boolean, List<Integer>> bigOrderIds(List<Order> orders, long threshold) {
+        // Same with a loop: two lists, add each order's id to the "big" or the "small" one,
+        // then put them in a map under the keys true and false.
         return orders.stream().collect(Collectors.partitioningBy(order -> order.total() >= threshold,
                 Collectors.mapping(Order::id, Collectors.toList())));
     }
 
     /** flatMap: one stream of all line items across all orders, then the best-selling product. */
     public static Optional<String> bestSellingProduct(List<Order> orders) {
+        // The most advanced pipeline here. Step by step, as loops:
+        //   1. Map<String, Integer> sold = new HashMap<>();
+        //      for (Order order : orders) for (Item item : order.items()) sold.merge(item.product(), item.quantity(), Integer::sum);
+        //   2. walk sold.entrySet() and keep the entry with the highest quantity (ties: the larger name);
+        //   3. return its key, or Optional.empty() if there were no items.
         return orders.stream()
                 .flatMap(order -> order.items().stream())
                 .collect(Collectors.groupingBy(Order.Item::product, Collectors.summingInt(Order.Item::quantity)))
@@ -66,6 +81,8 @@ public final class OrderReports {
 
     /** sorted with a comparator + limit: the top N orders by value. */
     public static List<Integer> topOrderIds(List<Order> orders, int n) {
+        // Same with a loop: copy the list, sort it with the same comparator, then take the ids of the
+        // first n orders. comparingLong(Order::total).reversed() = by total, highest first.
         return orders.stream()
                 .sorted(Comparator.comparingLong(Order::total).reversed())
                 .limit(n)

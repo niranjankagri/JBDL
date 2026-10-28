@@ -17,7 +17,9 @@ public final class ThreadExamples {
 
     /** Starts all threads first, then waits for each. Their log lines can interleave in any order. */
     public static List<String> runConcurrently(List<Thread> threads, List<String> log) throws InterruptedException {
-        threads.forEach(Thread::start);
+        for (Thread thread : threads) {
+            thread.start();
+        }
         for (Thread thread : threads) {
             thread.join();
         }

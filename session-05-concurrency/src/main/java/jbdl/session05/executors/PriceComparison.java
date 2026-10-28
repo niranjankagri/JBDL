@@ -71,7 +71,10 @@ public final class PriceComparison {
 
     /** invokeAll: submit a batch and wait for all of them. */
     public Quote cheapest(List<String> shops) throws InterruptedException, ExecutionException {
-        List<Callable<Quote>> tasks = shops.stream().map(this::askShop).toList();
+        List<Callable<Quote>> tasks = new ArrayList<>();
+        for (String shop : shops) {
+            tasks.add(askShop(shop));
+        }
         Quote best = null;
         for (Future<Quote> future : pool.invokeAll(tasks)) {
             Quote quote = future.get();
@@ -84,7 +87,11 @@ public final class PriceComparison {
 
     /** invokeAny: the first task to SUCCEED wins; the others are cancelled. */
     public Quote fastestAnswer(List<String> shops) throws InterruptedException, ExecutionException {
-        return pool.invokeAny(shops.stream().map(this::askShop).toList());
+        List<Callable<Quote>> tasks = new ArrayList<>();
+        for (String shop : shops) {
+            tasks.add(askShop(shop));
+        }
+        return pool.invokeAny(tasks);
     }
 
     /**
@@ -92,6 +99,17 @@ public final class PriceComparison {
      * blocking on each Future. Price with 18 % GST from the cheaper of two shops, or a fallback.
      */
     public CompletableFuture<String> bestPriceWithTax(String shopA, String shopB) {
+        // The most advanced code of the session. What each line means:
+        //   supplyAsync(...)     start call(shopA) on a pool thread, get a "future" result right away
+        //   thenCombine(b, ...)  when BOTH are done, keep the cheaper quote
+        //   thenApply(...)       when that is ready, turn it into the text with 18 % GST
+        //   exceptionally(...)   if any step failed, use this text instead
+        // The simple, blocking version of the same logic:
+        //   try {
+        //       Quote x = call(shopA);  Quote y = call(shopB);          // one after the other: slower
+        //       Quote best = x.priceInRupees() <= y.priceInRupees() ? x : y;
+        //       return best.shop() + " incl. GST: " + best.priceInRupees() * 118 / 100;
+        //   } catch (RuntimeException e) { return "no price available (" + e.getMessage() + ")"; }
         CompletableFuture<Quote> a = CompletableFuture.supplyAsync(() -> call(shopA), pool);
         CompletableFuture<Quote> b = CompletableFuture.supplyAsync(() -> call(shopB), pool);
         return a.thenCombine(b, (x, y) -> x.priceInRupees() <= y.priceInRupees() ? x : y)

@@ -23,7 +23,16 @@ public final class CollectionsOverview {
         }
     }
 
-    /** Comparator: any number of orders defined outside the class, combinable. */
+    /**
+     * Comparator: any number of orders defined outside the class, combinable. Read the chain left to
+     * right: compare by marks, reverse it (highest first), and if marks are equal compare by name.
+     * Written out as a class it would be:
+     *   int compare(Student a, Student b) {
+     *       int byMarks = Double.compare(b.marks(), a.marks());   // b before a = highest first
+     *       if (byMarks != 0) { return byMarks; }
+     *       return a.name().compareTo(b.name());
+     *   }
+     */
     public static final Comparator<Student> BY_MARKS_HIGH_FIRST_THEN_NAME =
             Comparator.comparingDouble(Student::marks).reversed().thenComparing(Student::name);
 
@@ -62,6 +71,6 @@ public final class CollectionsOverview {
     }
 
     public static void removeFailingWithRemoveIf(List<Student> students) {
-        students.removeIf(student -> student.marks() < 40);
+        students.removeIf(student -> student.marks() < 40); // "remove every student whose marks are below 40"
     }
 }

@@ -21,6 +21,9 @@ public final class HashMapRecipes {
         Map<String, Integer> counts = new TreeMap<>(); // sorted only so the output is readable
         for (String word : text.toLowerCase().split("\\W+")) {
             if (!word.isEmpty()) {
+                // merge = "put 1 if the word is new, otherwise old + 1". Without merge:
+                //   Integer old = counts.get(word);
+                //   counts.put(word, old == null ? 1 : old + 1);
                 counts.merge(word, 1, Integer::sum);
             }
         }
@@ -31,6 +34,10 @@ public final class HashMapRecipes {
     public static Map<Character, List<String>> byFirstLetter(List<String> words) {
         Map<Character, List<String>> groups = new TreeMap<>();
         for (String word : words) {
+            // Without computeIfAbsent:
+            //   List<String> list = groups.get(word.charAt(0));
+            //   if (list == null) { list = new ArrayList<>(); groups.put(word.charAt(0), list); }
+            //   list.add(word);
             groups.computeIfAbsent(word.charAt(0), letter -> new ArrayList<>()).add(word);
         }
         return groups;
