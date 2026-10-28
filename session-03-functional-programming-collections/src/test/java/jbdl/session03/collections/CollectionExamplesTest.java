@@ -20,6 +20,10 @@ import java.util.TreeSet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 3: the 2024 collection examples. Every implementation gets the same input [30, 10, 20, 10],
+ * so the differences in order, duplicates and sorting are visible in the expected values.
+ */
 class CollectionExamplesTest {
 
     @Test

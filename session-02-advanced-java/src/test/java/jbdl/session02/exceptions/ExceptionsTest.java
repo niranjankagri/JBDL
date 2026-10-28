@@ -14,8 +14,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+/**
+ * Topics 2-3: places eight throwables in the hierarchy, checks catch order and multi-catch, the
+ * custom exceptions, and exactly when finally and try-with-resources run.
+ */
 class ExceptionsTest {
 
+    /** Input for the parameterized test: a throwable and the kind it must be classified as. */
     static List<Arguments> throwables() {
         return List.of(
                 Arguments.of(new IOException(), ExceptionKinds.Kind.CHECKED),

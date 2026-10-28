@@ -14,6 +14,7 @@ public final class Car {
     private final String fuelType;
     private final boolean automatic;
 
+    /** Private: the only way to create a Car is through the Builder, which supplies every value. */
     private Car(Builder builder) {
         this.brand = builder.brand;
         this.color = builder.color;
@@ -24,10 +25,12 @@ public final class Car {
         this.automatic = builder.automatic;
     }
 
+    /** Starts a builder with the two required values; the rest are optional and named. */
     public static Builder builder(String brand, String name) {
         return new Builder(brand, name);
     }
 
+    /** One line about the drive train, e.g. "The car uses Petrol and is manual." */
     public String getInfo() {
         return "The car uses " + fuelType + " and is " + (automatic ? "automatic" : "manual") + ".";
     }
@@ -75,6 +78,9 @@ public final class Car {
             this.name = name;
         }
 
+        // Each setter stores one value and returns the builder itself, so calls can be chained:
+        // Car.builder("Hyundai", "Santro").color("Red").year(2010).build()
+
         public Builder color(String color) {
             this.color = color;
             return this;
@@ -100,6 +106,7 @@ public final class Car {
             return this;
         }
 
+        /** Creates the immutable Car from the collected values. */
         public Car build() {
             return new Car(this);
         }

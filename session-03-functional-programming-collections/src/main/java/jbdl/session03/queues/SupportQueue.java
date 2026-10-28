@@ -39,6 +39,7 @@ public final class SupportQueue {
         return tickets.poll();
     }
 
+    /** Polls until empty, so the titles come out in priority order (iteration would not be sorted). */
     public List<String> drainTitles() {
         List<String> titles = new ArrayList<>();
         for (Ticket ticket = tickets.poll(); ticket != null; ticket = tickets.poll()) {

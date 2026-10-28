@@ -13,6 +13,7 @@ public final class HolderConfig {
         private static final HolderConfig INSTANCE = new HolderConfig();
     }
 
+    /** The first call loads Holder, which creates INSTANCE; later calls just read it. */
     public static HolderConfig getInstance() {
         return Holder.INSTANCE;
     }

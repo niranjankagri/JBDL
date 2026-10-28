@@ -7,6 +7,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 2: the builder pattern sets every value by name, and fills in defaults for the optional ones.
+ */
 class CarBuilderTest {
 
     @Test

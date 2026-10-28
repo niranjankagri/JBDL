@@ -13,6 +13,7 @@ public enum AppRegistry {
     // shared by every caller, so it must be thread-safe
     private final Map<String, String> settings = new ConcurrentHashMap<>();
 
+    /** Safe from many threads at once: the map is a ConcurrentHashMap. */
     public void put(String key, String value) {
         settings.put(key, value);
     }

@@ -12,12 +12,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
+/**
+ * Topic 4: three 300 ms calls run in parallel, failures come back through Future.get, invokeAll
+ * and invokeAny, and a CompletableFuture flow that combines, transforms and recovers.
+ */
 @Timeout(20)
 class PriceComparisonTest {
 
     private static final Map<String, Long> PRICES = Map.of("ShopA", 1_000L, "ShopB", 950L, "ShopC", 1_200L);
     private static final long DELAY_MS = 300;
 
+    // a new pool per test (JUnit creates a new test instance per method), shut down after each
     private final ExecutorService pool = Executors.newFixedThreadPool(4);
     private final PriceComparison comparison = new PriceComparison(pool, PRICES, DELAY_MS);
 
@@ -35,7 +40,7 @@ class PriceComparisonTest {
         long millis = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - start);
 
         assertThat(quotes).containsExactly("ShopA: 1000", "ShopB: 950", "ShopC: 1200");
-        assertThat(millis).isLessThan(3 * DELAY_MS);
+        assertThat(millis).isLessThan(3 * DELAY_MS); // one after another would take at least 900 ms
     }
 
     @Test

@@ -20,6 +20,7 @@ public class CountingTask implements Runnable {
         this.log = log;
     }
 
+    /** Runs on whatever thread executes the task: a new Thread or a pool thread. */
     @Override
     public void run() {
         for (int i = 0; i < count; i++) {

@@ -25,6 +25,11 @@ public final class PriceComparison {
     private final Map<String, Long> prices;
     private final long delayMillis;
 
+    /**
+     * @param pool        the threads that run the shop calls (owned and shut down by the caller)
+     * @param prices      the price each shop answers with; a shop not in the map fails
+     * @param delayMillis how long each simulated call takes
+     */
     public PriceComparison(ExecutorService pool, Map<String, Long> prices, long delayMillis) {
         this.pool = pool;
         this.prices = prices;
@@ -94,6 +99,7 @@ public final class PriceComparison {
                 .exceptionally(error -> "no price available (" + error.getCause().getMessage() + ")");
     }
 
+    /** Runs a shop call on the current thread, as supplyAsync needs a Supplier, which can't throw checked exceptions. */
     private Quote call(String shop) {
         try {
             return askShop(shop).call();

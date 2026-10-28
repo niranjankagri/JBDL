@@ -7,6 +7,7 @@ package jbdl.session01.architecture;
 public record JvmInfo(String javaVersion, String vendor, String vmName, String operatingSystem,
                       int processors, long maxHeapMegabytes) {
 
+    /** Reads the facts from system properties and the Runtime of the JVM running this code. */
     public static JvmInfo current() {
         Runtime runtime = Runtime.getRuntime();
         return new JvmInfo(
@@ -19,6 +20,7 @@ public record JvmInfo(String javaVersion, String vendor, String vmName, String o
                 runtime.maxMemory() / (1024 * 1024));
     }
 
+    /** Prints the facts; run it on two machines or JDKs to see what changes and what doesn't. */
     public static void main(String[] args) {
         JvmInfo jvm = current();
         System.out.println("Java version:    " + jvm.javaVersion());

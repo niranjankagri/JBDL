@@ -110,6 +110,7 @@ public final class Counters {
         return counter.get();
     }
 
+    /** Runs all four counters under the same load; the unsafe one loses a different number each run. */
     public static void main(String[] args) throws InterruptedException {
         int threads = 8;
         int perThread = 100_000;

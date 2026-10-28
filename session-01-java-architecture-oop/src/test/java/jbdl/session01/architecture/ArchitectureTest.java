@@ -5,6 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 1 (Java architecture): checks what the running JVM reports, which class loader loads which
+ * class (bootstrap / platform / app), and that Java passes arguments by value.
+ */
 class ArchitectureTest {
 
     @Test
@@ -34,6 +38,7 @@ class ArchitectureTest {
     @Test
     @DisplayName("Our own classes come from the application loader, which delegates up the chain")
     void ownClassesUseApp() {
+        // our class: loaded by the application loader, whose parents are platform and bootstrap
         assertThat(ClassLoaders.chainOf(ClassLoaders.class)).containsExactly("app", "platform", ClassLoaders.BOOTSTRAP);
     }
 

@@ -6,6 +6,7 @@ public final class InheritanceDemo {
     private InheritanceDemo() {
     }
 
+    /** Base class, subclass through a base-class variable, a shared reference, and the factory. */
     public static void main(String[] args) {
         Car car = new Car("Hyundai", "Red", "Santro");
         System.out.println(car.getInfo());

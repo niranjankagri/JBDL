@@ -9,6 +9,10 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 2 (OOP basics): objects keep their own state, static state is shared, the class refuses
+ * invalid input, and == (identity) differs from equals (value), for a class and for a record.
+ */
 class OopBasicsTest {
 
     @Test
@@ -27,6 +31,7 @@ class OopBasicsTest {
     @Test
     @DisplayName("A static field is shared: every new object increases the same counter")
     void staticIsShared() {
+        // other tests open accounts too, so compare with the value before, not with a fixed number
         int before = BankAccount.accountsOpened();
 
         new BankAccount(ACCOUNT_OWNER);
@@ -46,7 +51,7 @@ class OopBasicsTest {
         assertThatThrownBy(() -> account.withdraw(5_000))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining("insufficient funds");
-        assertThat(account.getBalanceInPaise()).isEqualTo(1_000);
+        assertThat(account.getBalanceInPaise()).isEqualTo(1_000); // the refused operations changed nothing
     }
 
     @Test

@@ -10,11 +10,13 @@ public class Manager extends Employee implements Taxable {
         this.teamSize = teamSize;
     }
 
+    /** The bonus grows with the team: 1,000 rupees per team member. */
     @Override
     protected long bonusInRupees() {
         return 1_000L * teamSize;
     }
 
+    /** Taxable's one abstract method; Taxable's default taxInRupees() uses it. */
     @Override
     public long taxableIncomeInRupees() {
         return getBaseSalaryInRupees();

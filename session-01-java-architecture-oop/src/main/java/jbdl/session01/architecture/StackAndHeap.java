@@ -46,6 +46,7 @@ public final class StackAndHeap {
         box.setValue(1000);
     }
 
+    /** Runs the three cases and prints what the caller sees afterwards. */
     public static void main(String[] args) {
         int number = 5;
         addTen(number);

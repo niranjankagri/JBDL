@@ -8,6 +8,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
+/**
+ * Topic 1: the 2024 thread examples: join gives a fixed order, concurrent threads lose no steps
+ * and keep their own order, and extending Thread really runs on a new thread.
+ */
 @Timeout(10) // a thread that never finishes would otherwise hang the build
 class ThreadExamplesTest {
 

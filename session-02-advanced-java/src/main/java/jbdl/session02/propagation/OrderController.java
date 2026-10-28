@@ -9,6 +9,7 @@ public class OrderController {
         this.service = service;
     }
 
+    /** Maps every outcome to a status: 200 found, 400 bad input, 503 the database is down. */
     public String get(int id) {
         try {
             return "200 " + service.orderSummary(id);
@@ -19,6 +20,7 @@ public class OrderController {
         }
     }
 
+    /** The three outcomes, one after another. */
     public static void main(String[] args) {
         System.out.println(new OrderController(new OrderService(new OrderRepository(true))).get(7));
         System.out.println(new OrderController(new OrderService(new OrderRepository(true))).get(-1));

@@ -16,6 +16,7 @@ public final class ProducerConsumer {
     private ProducerConsumer() {
     }
 
+    /** Produces 1..items through a queue of the given capacity; returns what the consumer made of them. */
     public static List<Integer> run(int items, int capacity) throws InterruptedException {
         BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(capacity);
         List<Integer> consumed = new ArrayList<>();

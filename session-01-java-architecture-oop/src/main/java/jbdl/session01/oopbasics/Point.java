@@ -25,6 +25,7 @@ public final class Point {
         return y;
     }
 
+    /** Same value = same x and y. Steps: same object? same type? then compare the fields. */
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -36,6 +37,7 @@ public final class Point {
         return x == point.x && y == point.y;
     }
 
+    /** Built from the same fields as equals, so equal points always have equal hash codes. */
     @Override
     public int hashCode() {
         return Objects.hash(x, y);

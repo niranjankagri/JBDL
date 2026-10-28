@@ -7,10 +7,12 @@ public class OrderRepository {
 
     private final boolean databaseUp;
 
+    /** databaseUp = false simulates an outage, so the tests can trigger the checked exception. */
     public OrderRepository(boolean databaseUp) {
         this.databaseUp = databaseUp;
     }
 
+    /** Declares the checked SQLException; the unchecked IllegalArgumentException needs no declaration. */
     public String findOrder(int id) throws SQLException {
         if (!databaseUp) {
             throw new SQLException("connection refused", "08001");

@@ -1,5 +1,6 @@
 package jbdl.session01.principles;
 
+/** A Shape with one dimension, the radius; validates it once, in the constructor (encapsulation). */
 public class Circle extends Shape {
 
     private final double radius;
@@ -12,6 +13,7 @@ public class Circle extends Shape {
         this.radius = radius;
     }
 
+    /** Circle's own formula: pi * r^2. */
     @Override
     public double area() {
         return Math.PI * radius * radius;

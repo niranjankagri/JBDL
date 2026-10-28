@@ -10,6 +10,10 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topics 1-2: four ways to write one comparator give the same order; the four method reference
+ * kinds; capture of effectively final variables; the remaining built-in interfaces.
+ */
 class LambdaAndBuiltInsTest {
 
     private static final List<String> WORDS = List.of("banana", "fig", "apple");

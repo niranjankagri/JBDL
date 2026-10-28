@@ -18,6 +18,7 @@ public class Car {
         this.name = name;
     }
 
+    /** Overridden by SuperCar; called through a Car variable, the subclass version runs. */
     public String getInfo() {
         return "The car is " + brand + "'s " + name;
     }

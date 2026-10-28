@@ -6,6 +6,10 @@ import jbdl.session03.queues.SupportQueue.Severity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 4: PriorityQueue order with a tie-breaker, null instead of an exception on an empty queue,
+ * ArrayDeque as two stacks, and a bounded most-recent-first deque.
+ */
 class QueuesTest {
 
     @Test

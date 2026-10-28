@@ -10,6 +10,7 @@ public final class Accounts {
     private Accounts() {
     }
 
+    /** Its monitor (synchronized on the object) guards the balance. */
     public static final class Account {
         private final int id;
         private long balance;
@@ -28,6 +29,7 @@ public final class Accounts {
         }
     }
 
+    /** Moves money atomically: both accounts are locked, always the lower id first. */
     public static void transfer(Account from, Account to, long amount) {
         Account first = from.id < to.id ? from : to;   // lock ordering prevents deadlock
         Account second = from.id < to.id ? to : from;

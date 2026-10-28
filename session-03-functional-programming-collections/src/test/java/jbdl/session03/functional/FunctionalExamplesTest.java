@@ -10,6 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+/**
+ * Topics 1-2: the 2024 functional examples: three ways to implement Greeting, and Function,
+ * Predicate and Consumer with their combinators.
+ */
 class FunctionalExamplesTest {
 
     @Test
