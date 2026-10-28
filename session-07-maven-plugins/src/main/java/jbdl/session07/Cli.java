@@ -15,7 +15,10 @@ public final class Cli {
 
     /** Turns words into a slug for a URL: "Maven Plugins 101!" -> "maven-plugins-101". */
     public static String slug(String text) {
+        // 1. remove accents (é -> e), 2. lower case, 3. the regular expression [^a-z0-9]+ means "one or
+        //    more characters that are NOT a-z or 0-9": each such run becomes a single space
         String cleaned = StringUtils.stripAccents(text).toLowerCase().replaceAll("[^a-z0-9]+", " ");
+        // split on spaces (empty parts dropped), then join the words with "-"
         return String.join("-", StringUtils.split(cleaned));
     }
 
