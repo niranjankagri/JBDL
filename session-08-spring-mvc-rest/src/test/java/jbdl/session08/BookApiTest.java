@@ -43,11 +43,13 @@ class BookApiTest {
     @Autowired
     private BookService service;
 
+    /** The service is a singleton bean shared by all tests in the context: reset it before each one. */
     @BeforeEach
     void emptyStore() {
         service.clear();
     }
 
+    /** Test helper: create a book through the API itself (not the service), expecting 201. */
     private void create(String json) throws Exception {
         mvc.perform(post("/api/books").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isCreated());
@@ -125,6 +127,7 @@ class BookApiTest {
     @Test
     @DisplayName("Invalid body: 400 with one message per field")
     void validationProblem() throws Exception {
+        // four broken fields at once: blank title, 3-digit ISBN, negative price, year before printing
         String invalid = """
                 {"title": "", "author": "X", "isbn": "123", "price": -5, "publishedYear": 1200}""";
 
@@ -140,6 +143,7 @@ class BookApiTest {
     @Test
     @DisplayName("Spring answers wrong method (405) and wrong media type (415) by itself")
     void frameworkErrors() throws Exception {
+        // no controller code handles these: Spring MVC answers from the mappings and converters
         mvc.perform(post("/api/books/1")).andExpect(status().isMethodNotAllowed());
         mvc.perform(post("/api/books").contentType(MediaType.TEXT_PLAIN).content("hello"))
                 .andExpect(status().isUnsupportedMediaType());

@@ -19,6 +19,7 @@ public class BookService {
     private final Map<Long, Book> books = new ConcurrentHashMap<>();
     private final AtomicLong nextId = new AtomicLong(1);
 
+    /** All books in id order; author (case-insensitive) filters when given, null means all. */
     public List<Book> findAll(String author) {
         return books.values().stream()
                 .filter(book -> author == null || book.author().equalsIgnoreCase(author))
@@ -26,6 +27,7 @@ public class BookService {
                 .toList();
     }
 
+    /** The book, or BookNotFoundException (which the API turns into a 404). */
     public Book findById(long id) {
         Book book = books.get(id);
         if (book == null) {
@@ -34,6 +36,7 @@ public class BookService {
         return book;
     }
 
+    /** Assigns the next id (thread-safe AtomicLong) and stores the new book. */
     public Book create(BookRequest request) {
         long id = nextId.getAndIncrement();
         Book book = toBook(id, request);
@@ -51,6 +54,7 @@ public class BookService {
 
     /** PATCH semantics: change only the given field. */
     public Book changePrice(long id, BigDecimal price) {
+        // compute does the read-check-write as one atomic step on the map entry
         return books.compute(id, (key, existing) -> {
             if (existing == null) {
                 throw new BookNotFoundException(id);
@@ -59,6 +63,7 @@ public class BookService {
         });
     }
 
+    /** Removes the book; deleting an unknown id is a 404, also on a repeated DELETE. */
     public void delete(long id) {
         if (books.remove(id) == null) {
             throw new BookNotFoundException(id);
@@ -71,6 +76,7 @@ public class BookService {
         nextId.set(1);
     }
 
+    /** Maps the client's DTO to the stored record, adding the server-owned id. */
     private static Book toBook(long id, BookRequest request) {
         return new Book(id, request.title(), request.author(), request.isbn(), request.price(), request.publishedYear());
     }
