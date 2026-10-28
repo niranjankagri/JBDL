@@ -1,0 +1,49 @@
+# Compiles (warnings are errors) and runs the JUnit tests on every push and pull request to main,
+# on the oldest supported Java LTS (17) and the newest (25). No external services are used, so no
+# scheduled run is needed. The JUnit XML is kept as its own artifact like in the other portfolio repos.
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Build and unit tests (JDK ${{ matrix.java }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        java: ['17', '25']
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Java ${{ matrix.java }}
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+          cache: maven
+
+      - name: Build and run the tests
+        run: ./mvnw -B verify
+
+      - name: Keep the JUnit results
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: junit-tests-jdk${{ matrix.java }}
+          path: target/surefire-reports/TEST-*.xml
+          if-no-files-found: warn
+          retention-days: 30
