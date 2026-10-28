@@ -19,6 +19,7 @@
         <module>session-03-functional-programming-collections</module>
         <module>session-04-java-advanced-features</module>
         <module>session-05-concurrency</module>
+        <module>session-06-maven</module>
     </modules>
 
     <properties>

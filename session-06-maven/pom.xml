@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Session 6: a module that uses what the session explains. The parts of a POM are commented
+     where they appear; the topic READMEs explain them in detail. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Inherits groupId, version, Java release, plugin versions and test libraries from the parent -->
+    <parent>
+        <groupId>io.github.niranjankagri</groupId>
+        <artifactId>java-backend-development</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <!-- Coordinates: groupId (inherited) + artifactId + version (inherited) identify this artifact -->
+    <artifactId>session-06-maven</artifactId>
+    <name>Session 6: Maven Project Management</name>
+    <!-- packaging defaults to jar: the package phase builds target/session-06-maven-1.0.0-SNAPSHOT.jar -->
+
+    <properties>
+        <commons-lang3.version>3.21.0</commons-lang3.version>
+    </properties>
+
+    <dependencies>
+        <!-- A library from Maven Central. Scope "compile" (the default): needed to compile, test and run.
+             Maven also downloads ITS dependencies (transitive); see ./mvnw -pl session-06-maven dependency:tree -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        <!-- junit-jupiter and assertj-core come from the parent with scope "test":
+             on the test classpath only, never packaged into the jar -->
+    </dependencies>
+
+    <build>
+        <resources>
+            <!-- Filtering: during the process-resources phase, ${...} placeholders in this folder are
+                 replaced with values from the POM, so the code can read its own version at run time -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+</project>
