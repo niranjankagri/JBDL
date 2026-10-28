@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/niranjankagri/JBDL/actions/workflows/tests.yml/badge.svg)](https://github.com/niranjankagri/JBDL/actions/workflows/tests.yml)
 
-My Java practice exercises from the 2024 JBDL course, rebuilt as a small Maven project: every
+My practice exercises from the core Java part of the 2024 JBDL course "Java Backend Development - Spring Boot, Microservices with AI", rebuilt as a small Maven project: every
 example returns its result instead of only printing it, so each concept is checked by a JUnit test.
 
 The original 2024 code is kept unchanged in the history: commit
