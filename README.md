@@ -1,12 +1,12 @@
-# JBDL (Java Backend Development Live): Java fundamentals
+# Java Backend Development - Spring Boot, Microservices with AI
 
-[![Tests](https://github.com/niranjankagri/JBDL/actions/workflows/tests.yml/badge.svg)](https://github.com/niranjankagri/JBDL/actions/workflows/tests.yml)
+[![Tests](https://github.com/niranjankagri/java-backend-development/actions/workflows/tests.yml/badge.svg)](https://github.com/niranjankagri/java-backend-development/actions/workflows/tests.yml)
 
-My practice exercises from the core Java part of the 2024 JBDL course "Java Backend Development - Spring Boot, Microservices with AI", rebuilt as a small Maven project: every
+My practice exercises from the core Java part of this 2024 course (JBDL, Java Backend Development Live), rebuilt as a small Maven project: every
 example returns its result instead of only printing it, so each concept is checked by a JUnit test.
 
 The original 2024 code is kept unchanged in the history: commit
-[`4b8754b`](https://github.com/niranjankagri/JBDL/tree/4b8754b) ("Add 2024 Java course practice code").
+[`4b8754b`](https://github.com/niranjankagri/java-backend-development/tree/4b8754b) ("Add 2024 Java course practice code").
 
 ## Topics
 
