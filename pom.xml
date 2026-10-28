@@ -6,9 +6,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.niranjankagri</groupId>
-    <artifactId>jbdl</artifactId>
+    <artifactId>java-backend-development</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>JBDL - Java fundamentals</name>
+    <name>Java Backend Development - core Java exercises</name>
 
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
