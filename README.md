@@ -1,8 +1,8 @@
-# JBDL: Java fundamentals
+# JBDL (Java Backend Development Live): Java fundamentals
 
 [![Tests](https://github.com/niranjankagri/JBDL/actions/workflows/tests.yml/badge.svg)](https://github.com/niranjankagri/JBDL/actions/workflows/tests.yml)
 
-My Java practice exercises from a 2024 Java backend course (JBDL), rebuilt as a small Maven project: every
+My Java practice exercises from the 2024 JBDL course, rebuilt as a small Maven project: every
 example returns its result instead of only printing it, so each concept is checked by a JUnit test.
 
 The original 2024 code is kept unchanged in the history: commit
