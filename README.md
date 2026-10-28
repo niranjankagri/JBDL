@@ -16,7 +16,7 @@ One session is added per day, each in its own pull request.
 | 2 | [Advanced Java Concepts](session-02-advanced-java/README.md) | Done |
 | 3 | [Java 8 Functional Programming & Collections Overview](session-03-functional-programming-collections/README.md) | Done |
 | 4 | [Java Advanced Features](session-04-java-advanced-features/README.md) | Done |
-| 5 | [Java Concurrency Essentials](session-05-concurrency/README.md) | 2024 code in place; session planned |
+| 5 | [Java Concurrency Essentials](session-05-concurrency/README.md) | Done |
 | 6 | Maven Project Management | Planned |
 | 7 | Maven Plugins | Planned |
 | 8 | Spring MVC Basics & REST API Implementation | Planned |
