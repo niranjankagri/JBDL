@@ -1,5 +1,6 @@
 package jbdl.session01.principles;
 
+/** A Shape with width and height. Square extends it and reuses area() unchanged. */
 public class Rectangle extends Shape {
 
     private final double width;
@@ -19,6 +20,7 @@ public class Rectangle extends Shape {
         this.height = height;
     }
 
+    /** width * height; also correct for Square, which passes the same value twice. */
     @Override
     public double area() {
         return width * height;

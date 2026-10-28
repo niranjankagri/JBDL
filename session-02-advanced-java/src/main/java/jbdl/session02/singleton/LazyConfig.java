@@ -27,6 +27,7 @@ public final class LazyConfig {
         return result;
     }
 
+    /** Package-private, for the test that checks the constructor ran exactly once. */
     static synchronized int timesCreated() {
         return created;
     }

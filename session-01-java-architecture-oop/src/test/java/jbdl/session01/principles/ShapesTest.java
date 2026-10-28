@@ -8,8 +8,13 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 3 (the four OOP pillars) on the Shape hierarchy: each subclass's own area(), one loop for
+ * all shapes (overriding), overloads chosen by declared type, and validating constructors.
+ */
 class ShapesTest {
 
+    // areas are doubles: compare within a tolerance, never with exact equality
     private static final double PRECISION = 1e-9;
 
     @Test

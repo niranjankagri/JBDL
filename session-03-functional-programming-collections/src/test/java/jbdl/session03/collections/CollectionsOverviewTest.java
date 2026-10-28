@@ -10,8 +10,13 @@ import jbdl.session03.collections.CollectionsOverview.Student;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 3: natural order vs comparator order, the for-each removal trap (and its silent
+ * second-to-last case), the safe ways to remove, and immutable lists.
+ */
 class CollectionsOverviewTest {
 
+    // two students share 91.0 marks, so the comparator's tie-breaker (name) is tested too
     private static final List<Student> CLASS_LIST = List.of(
             new Student(3, "Ravi", 72.5),
             new Student(1, "Asha", 91.0),

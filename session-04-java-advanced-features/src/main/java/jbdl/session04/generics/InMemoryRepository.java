@@ -19,23 +19,28 @@ public class InMemoryRepository<T, ID> {
     private final Map<ID, T> rows = new LinkedHashMap<>();
     private final Function<T, ID> idOf;
 
+    /** idOf tells the repository how to read the id from an entity, e.g. Customer::id. */
     public InMemoryRepository(Function<T, ID> idOf) {
         this.idOf = idOf;
     }
 
+    /** Inserts, or replaces the entity that has the same id (like Spring Data's save). */
     public T save(T entity) {
         rows.put(idOf.apply(entity), entity);
         return entity;
     }
 
+    /** Optional instead of null: the caller must decide what "not found" means. */
     public Optional<T> findById(ID id) {
         return Optional.ofNullable(rows.get(id));
     }
 
+    /** All entities in insertion order (LinkedHashMap), as a new list. */
     public List<T> findAll() {
         return new ArrayList<>(rows.values());
     }
 
+    /** true if something was deleted. */
     public boolean deleteById(ID id) {
         return rows.remove(id) != null;
     }

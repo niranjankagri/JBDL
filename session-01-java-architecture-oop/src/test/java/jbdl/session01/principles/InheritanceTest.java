@@ -13,6 +13,10 @@ import java.time.Year;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 3: the 2024 Car/SuperCar classes: constructor chaining, an override that builds on
+ * super.getInfo(), and the factory that hides which subclass it creates.
+ */
 class InheritanceTest {
 
     @Test

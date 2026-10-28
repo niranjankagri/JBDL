@@ -14,6 +14,11 @@ import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+/**
+ * Topic 3: the three safe counters never lose an increment, two-way transfers finish without
+ * deadlock and keep the total, and a BlockingQueue hands over every item in order.
+ * The unsafe counter is not asserted: its result is random (see Counters.main).
+ */
 @Timeout(30)
 class SynchronizationTest {
 
@@ -39,6 +44,7 @@ class SynchronizationTest {
         Account b = new Account(2, 1_000_000);
         ExecutorService pool = Executors.newFixedThreadPool(8);
 
+        // half the transfers go A -> B, half B -> A, at the same time: the classic deadlock setup
         IntStream.range(0, 10_000).forEach(i -> pool.execute(() -> {
             if (i % 2 == 0) {
                 Accounts.transfer(a, b, 1);

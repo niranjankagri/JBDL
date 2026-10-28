@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 4: an exception travels up repository -> service -> controller; the checked one is wrapped
+ * with its cause kept, the unchecked one passes through untouched.
+ */
 class PropagationTest {
 
     private static OrderController controller(boolean databaseUp) {

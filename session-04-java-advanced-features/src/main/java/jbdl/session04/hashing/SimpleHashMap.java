@@ -15,6 +15,7 @@ public class SimpleHashMap<K, V> {
     private static final int INITIAL_CAPACITY = 16;
     private static final double LOAD_FACTOR = 0.75;
 
+    /** One entry; `next` links entries that landed in the same bucket (a collision chain). */
     private static final class Node<K, V> {
         final int hash;
         final K key;
@@ -44,10 +45,12 @@ public class SimpleHashMap<K, V> {
         return h ^ (h >>> 16);
     }
 
+    /** Same as hash mod capacity, because capacity is always a power of two. */
     public static int indexFor(int hash, int capacity) {
         return hash & (capacity - 1);
     }
 
+    /** Adds or replaces; returns the old value or null, like java.util.HashMap.put. */
     public V put(K key, V value) {
         int hash = hash(key);
         int index = indexFor(hash, buckets.length);
@@ -59,6 +62,7 @@ public class SimpleHashMap<K, V> {
                 return old;
             }
         }
+        // new key: put it at the head of the bucket's chain, then grow the table if it is too full
         buckets[index] = new Node<>(hash, key, value, buckets[index]);
         if (++size > buckets.length * LOAD_FACTOR) {
             resize();
@@ -66,6 +70,7 @@ public class SimpleHashMap<K, V> {
         return null;
     }
 
+    /** Looks only in the one bucket the key's hash points to. */
     public V get(K key) {
         int hash = hash(key);
         for (Node<K, V> node = buckets[indexFor(hash, buckets.length)]; node != null; node = node.next) {
@@ -76,6 +81,7 @@ public class SimpleHashMap<K, V> {
         return null;
     }
 
+    /** Doubles the table and puts every entry into its bucket in the bigger table (rehashing). */
     private void resize() {
         Node<K, V>[] old = buckets;
         buckets = newBuckets(old.length * 2);

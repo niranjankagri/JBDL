@@ -17,6 +17,7 @@ public final class ClassLoaders {
     /** From the loader that loaded the class up to the bootstrap loader, e.g. [app, platform, bootstrap]. */
     public static List<String> chainOf(Class<?> type) {
         List<String> chain = new ArrayList<>();
+        // walk up the parent chain; the bootstrap loader is represented by null, so the loop stops there
         for (ClassLoader loader = type.getClassLoader(); loader != null; loader = loader.getParent()) {
             chain.add(loader.getName());
         }
@@ -24,6 +25,7 @@ public final class ClassLoaders {
         return chain;
     }
 
+    /** One class from each loader: java.base, another JDK module, and our own code. */
     public static void main(String[] args) {
         System.out.println("String (java.base):        " + chainOf(String.class));
         System.out.println("java.sql.Date (java.sql):  " + chainOf(java.sql.Date.class));

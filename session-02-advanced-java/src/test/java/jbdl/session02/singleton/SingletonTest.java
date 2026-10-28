@@ -17,6 +17,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
+/**
+ * Topic 5: all four singleton kinds return one instance; the lazy one stays single under a 64-thread
+ * race; reflection can break a class-based singleton but not the enum.
+ */
 class SingletonTest {
 
     @Test
@@ -33,6 +37,7 @@ class SingletonTest {
     @DisplayName("64 threads asking at the same moment get one LazyConfig, created once")
     void lazyIsThreadSafe() throws Exception {
         int threads = 64;
+        // the latch holds every thread at the starting line, so they all call getInstance() together
         CountDownLatch start = new CountDownLatch(1);
         ExecutorService pool = Executors.newFixedThreadPool(threads);
         try {

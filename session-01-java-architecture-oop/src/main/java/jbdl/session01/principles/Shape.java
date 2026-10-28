@@ -10,6 +10,7 @@ public abstract class Shape {
 
     private final String name;
 
+    /** protected: only subclasses call it (via super(name)); an abstract class can't be created directly. */
     protected Shape(String name) {
         this.name = name;
     }

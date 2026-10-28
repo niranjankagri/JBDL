@@ -7,6 +7,10 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 4: our hash formula equals String.hashCode, bucket index and resize of SimpleHashMap,
+ * what a constant or a mutable hashCode does to a map, and SHA-256's known digest.
+ */
 class HashingTest {
 
     @Test
@@ -29,6 +33,7 @@ class HashingTest {
     @Test
     @DisplayName("put/get/replace work; the table doubles past the 0.75 load factor")
     void putGetResize() {
+        // 13 entries: one more than 16 * 0.75, so exactly one resize must happen
         SimpleHashMap<String, Integer> map = new SimpleHashMap<>();
         for (int i = 0; i < 13; i++) {
             map.put("key" + i, i);

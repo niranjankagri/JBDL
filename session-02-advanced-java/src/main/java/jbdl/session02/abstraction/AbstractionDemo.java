@@ -2,6 +2,10 @@ package jbdl.session02.abstraction;
 
 import java.util.List;
 
+/**
+ * Runs the abstraction examples together: two employees and an invoice handled as Payable, a
+ * manager's tax from a default method, the diamond resolution and a sealed payment method.
+ */
 public final class AbstractionDemo {
 
     private AbstractionDemo() {
@@ -12,6 +16,7 @@ public final class AbstractionDemo {
                 new Developer("Asha", 1_200_000),
                 new Manager("Ravi", 2_400_000, 6),
                 new Invoice("Cloud hosting", 15_000));
+        // one loop, three classes: each object runs its own monthlyPayInRupees()
         payables.forEach(p -> System.out.println(p + " -> monthly " + p.monthlyPayInRupees()));
         System.out.println("Total monthly: " + Payable.totalMonthly(payables));
         System.out.println("Manager tax: " + new Manager("Ravi", 2_400_000, 6).taxInRupees());

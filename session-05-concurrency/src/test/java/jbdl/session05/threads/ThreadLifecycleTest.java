@@ -6,6 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
+/**
+ * Topic 1: a real thread's states, interrupt waking a sleeping thread, and the daemon default.
+ */
 @Timeout(10)
 class ThreadLifecycleTest {
 

@@ -41,6 +41,7 @@ public final class HashingFacts {
             this.name = name;
         }
 
+        /** Changes the field hashCode depends on: never do this to a key that is inside a map. */
         public void rename(String newName) {
             this.name = newName;
         }

@@ -9,6 +9,10 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 1: generic class and method without casts, a bounded type parameter over three types,
+ * wildcards (PECS), type erasure, and one repository class for two entity types.
+ */
 class GenericsTest {
 
     record Customer(int id, String name) {

@@ -5,9 +5,11 @@ public final class EagerConfig {
 
     private static final EagerConfig INSTANCE = new EagerConfig();
 
+    /** private: no other class can call new EagerConfig(). */
     private EagerConfig() {
     }
 
+    /** Always the same object, created when the class was loaded. */
     public static EagerConfig getInstance() {
         return INSTANCE;
     }

@@ -5,6 +5,7 @@ public class Wallet {
 
     private long balanceInPaise;
 
+    /** Starts with the given balance (in paise, never double for money). */
     public Wallet(long balanceInPaise) {
         this.balanceInPaise = balanceInPaise;
     }

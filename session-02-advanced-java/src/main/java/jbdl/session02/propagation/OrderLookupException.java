@@ -5,6 +5,7 @@ public class OrderLookupException extends Exception {
 
     private static final long serialVersionUID = 1L;
 
+    /** Always pass the cause on: it ends up as "Caused by:" in the stack trace. */
     public OrderLookupException(String message, Throwable cause) {
         super(message, cause);
     }

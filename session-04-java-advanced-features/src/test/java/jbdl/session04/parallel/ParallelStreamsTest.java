@@ -6,6 +6,11 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 5: only the deterministic facts about parallel streams are asserted (same sum, threads used,
+ * order kept by forEachOrdered and toList). The unsafe shared-list version is never asserted:
+ * its result changes every run, so it is shown in the demo main instead.
+ */
 class ParallelStreamsTest {
 
     @Test

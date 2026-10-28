@@ -34,11 +34,13 @@ public class BankAccount {
         this.balanceInPaise = openingBalanceInPaise;
     }
 
+    /** Adds money; refuses zero or negative amounts. */
     public void deposit(long amountInPaise) {
         requirePositive(amountInPaise);
         balanceInPaise += amountInPaise;
     }
 
+    /** Takes money out; refuses invalid amounts and never lets the balance go below zero. */
     public void withdraw(long amountInPaise) {
         requirePositive(amountInPaise);
         if (amountInPaise > balanceInPaise) {
@@ -71,11 +73,13 @@ public class BankAccount {
         return accountsOpened;
     }
 
+    /** Readable form for logs and the demo, e.g. "ACC-1 (Niranjan): 425.50" (paise shown as rupees). */
     @Override
     public String toString() {
         return accountNumber + " (" + owner + "): " + balanceInPaise / 100 + "." + String.format("%02d", balanceInPaise % 100);
     }
 
+    /** Two accounts with their own balances, one shared counter, and a refused withdrawal. */
     public static void main(String[] args) {
         BankAccount first = new BankAccount("Niranjan", 50_000);
         BankAccount second = new BankAccount("Asha");

@@ -9,6 +9,7 @@ public class SuperCar extends Car {
     private final int firstRaceYear;
     private final int trophiesWon;
 
+    /** super(...) must come first: the Car part of the object is built before the SuperCar part. */
     public SuperCar(String brand, String color, String name, int firstRaceYear, int trophiesWon) {
         super(brand, color, name);
         this.firstRaceYear = firstRaceYear;

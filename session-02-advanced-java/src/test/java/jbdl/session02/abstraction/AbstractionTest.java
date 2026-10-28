@@ -7,6 +7,11 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 1: what an abstract class can do that an interface can't (state, constructor, template
+ * method) and the reverse (several per class, unrelated implementers), plus default-method
+ * conflicts and a sealed interface.
+ */
 class AbstractionTest {
 
     @Test

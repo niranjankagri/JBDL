@@ -9,6 +9,10 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 3: each HashMap recipe (merge, computeIfAbsent, getOrDefault, putIfAbsent), null keys,
+ * and the eviction order of the LinkedHashMap LRU cache.
+ */
 class HashMapRecipesTest {
 
     @Test

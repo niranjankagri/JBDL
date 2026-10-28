@@ -10,6 +10,10 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Topic 2: every report of OrderReports on the five shared test orders (TestOrders), plus laziness
+ * (findFirst stops early) and single use of a stream.
+ */
 class OrderReportsTest {
 
     @Test
@@ -61,6 +65,7 @@ class OrderReportsTest {
     @Test
     @DisplayName("Lazy: findFirst stops at the first match; later orders are never looked at")
     void laziness() {
+        // the peek in firstCancelled records every order the pipeline actually looked at
         List<Integer> visited = new ArrayList<>();
 
         assertThat(OrderReports.firstCancelled(ORDERS, visited::add)).contains(3);

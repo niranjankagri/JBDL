@@ -35,6 +35,7 @@ public final class Shapes {
         return "round shape: " + circle.getName();
     }
 
+    /** Prints each shape, the total, and which overload the compiler picked for each call. */
     public static void main(String[] args) {
         List<Shape> shapes = List.of(new Circle(1), new Rectangle(2, 3), new Square(2));
         shapes.forEach(shape -> System.out.println(shape.describe()));
