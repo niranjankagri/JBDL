@@ -13,7 +13,7 @@ One session is added per day, each in its own pull request.
 | # | Session | Status |
 |---|---|---|
 | 1 | [Java Architecture and Basics of OOPs](session-01-java-architecture-oop/README.md) | Done |
-| 2 | Advanced Java Concepts: abstract classes vs interfaces, exceptions, Singleton | Planned |
+| 2 | [Advanced Java Concepts](session-02-advanced-java/README.md) | Done |
 | 3 | [Java 8 Functional Programming & Collections Overview](session-03-functional-programming-collections/README.md) | 2024 code in place; session planned |
 | 4 | Java Advanced Features: generics, Streams, HashMap, hashing, parallel streams | Planned |
 | 5 | [Java Concurrency Essentials](session-05-concurrency/README.md) | 2024 code in place; session planned |
