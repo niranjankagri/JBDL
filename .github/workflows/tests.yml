@@ -44,6 +44,6 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: junit-tests-jdk${{ matrix.java }}
-          path: target/surefire-reports/TEST-*.xml
+          path: "**/target/surefire-reports/TEST-*.xml"
           if-no-files-found: warn
           retention-days: 30
