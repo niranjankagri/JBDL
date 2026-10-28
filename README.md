@@ -2,56 +2,78 @@
 
 [![Tests](https://github.com/niranjankagri/java-backend-development/actions/workflows/tests.yml/badge.svg)](https://github.com/niranjankagri/java-backend-development/actions/workflows/tests.yml)
 
-My practice exercises from the core Java part of this 2024 course (JBDL, Java Backend Development Live), rebuilt as a small Maven project: every
-example returns its result instead of only printing it, so each concept is checked by a JUnit test.
+My work for the Java backend course (JBDL, Java Backend Development Live), session by session: from
+core Java to Spring Boot, microservices and AI tools. Every topic has a README; topics with code
+explain it and link to the classes, and every example is checked by tests.
 
-The original 2024 code is kept unchanged in the history: commit
-[`4b8754b`](https://github.com/niranjankagri/java-backend-development/tree/4b8754b) ("Add 2024 Java course practice code").
+One session is added per day, each in its own pull request.
 
-## Topics
+## Sessions
 
-| Package | What it shows | Run the demo |
+| # | Session | Status |
 |---|---|---|
-| `jbdl.basics` | Builder pattern for a seven-property `Car`; quiz traps: byte overflow, the `Integer` cache and `==`, post-increment with `\|\|` | `JavaQuiz` |
-| `jbdl.inheritance` | Overloaded + chained constructors, `extends`, overriding with `super`, dynamic dispatch, reference assignment, factory pattern | `InheritanceDemo` |
-| `jbdl.collections` | List / Set / Map / Queue implementations given the same input: order, duplicates, sorting, FIFO vs priority | `CollectionExamples` |
-| `jbdl.functional` | Custom `@FunctionalInterface` with a default method; named class vs anonymous class vs lambda; `Function` (`andThen`, `compose`, `identity`), `Predicate` (`and`, `or`, `negate`), `Consumer` (`andThen`) | `FunctionalExamples` |
-| `jbdl.multithreading` | `Runnable` vs extending `Thread`, `start()` vs `run()`, concurrent threads vs `join()` one by one, a thread-safe shared list | `ThreadExamples` |
+| 1 | [Java Architecture and Basics of OOPs](session-01-java-architecture-oop/README.md) | Done |
+| 2 | Advanced Java Concepts: abstract classes vs interfaces, exceptions, Singleton | Planned |
+| 3 | [Java 8 Functional Programming & Collections Overview](session-03-functional-programming-collections/README.md) | 2024 code in place; session planned |
+| 4 | Java Advanced Features: generics, Streams, HashMap, hashing, parallel streams | Planned |
+| 5 | [Java Concurrency Essentials](session-05-concurrency/README.md) | 2024 code in place; session planned |
+| 6 | Maven Project Management | Planned |
+| 7 | Maven Plugins | Planned |
+| 8 | Spring MVC Basics & REST API Implementation | Planned |
+| 9 | Spring Boot Advanced Features: AOP, Lombok, logging | Planned |
+| 10 | Java Database Connectivity (JDBC) | Planned |
+| 11 | Hibernate, Spring Data JPA | Planned |
+| 12 | Minor Project: Splitwise Backend (Part 1) | Planned |
+| 13 | Minor Project: Splitwise Backend (Continued) | Planned |
+| 14 | Unit Testing with JUnit & Mockito | Planned |
+| 15 | Redis & Caching | Planned |
+| 16 | Spring Security & Authentication | Planned |
+| 17 | Splitwise Backend: Advanced Enhancements | Planned |
+| 18 | OAuth 2 & GitHub Integration | Planned |
+| 19 | Microservices | Planned |
+| 20 | Messaging & Resilience | Planned |
+| 21 | Airbnb Backend System (Part 1) | Planned |
+| 22 | Airbnb Backend System (Part 2) | Planned |
+| 23 | Deployment of Airbnb Backend Application | Planned |
+| 24 | Deployment of Airbnb Backend Application (Continued) | Planned |
+| 25 | The AI Toolkit & Developer Setup | Planned |
+| 26 | Prompt Engineering & Vibe Coding | Planned |
+| 27 | Spec-Driven Development with AI | Planned |
+| 28 | RAG Systems & Context-Aware AI | Planned |
+
+## Layout
+
+```
+pom.xml                          parent: Java version, dependency versions, compiler + test settings
+session-NN-<name>/
+  README.md                      the session: topics, what you can do after it, how to run
+  topics/NN-<topic>/README.md    one README per topic; topics with code explain it and link to it
+  pom.xml, src/                  only for sessions with code (each is a Maven module)
+.github/workflows/tests.yml      CI: build + all tests on JDK 17 and 25 for every pull request
+```
 
 ## Run it
 
 Needs Java 17 or newer. Maven itself is not needed: the Maven Wrapper downloads a checked version.
 
 ```bash
-./mvnw verify                                   # compile (warnings are errors) + 29 tests
-java -cp target/classes jbdl.basics.JavaQuiz    # any class from the table above
+./mvnw verify                                       # every session: compile (warnings are errors) + tests
+./mvnw -pl session-01-java-architecture-oop verify  # one session
 ```
 
-On Windows use `mvnw.cmd verify`.
+On Windows use `mvnw.cmd`.
 
-## Project layout
+## The 2024 code
 
-```
-src/main/java/jbdl/   basics, inheritance, collections, functional, multithreading
-src/test/java/jbdl/   one test class per package
-                      testdata/TestData.java: shared inputs used by every test class
-.github/workflows/    CI: build + tests on JDK 17 and 25 for every push and pull request
-```
+My original 2024 exercises are kept unchanged in the history: commit
+[`4b8754b`](https://github.com/niranjankagri/java-backend-development/tree/4b8754b). They were upgraded
+(tests, fixes) and now live in the session they belong to:
 
-## What changed from the 2024 version
-
-| 2024 file(s) | Now | Why |
+| 2024 file(s) | Now | What changed |
 |---|---|---|
-| `Car.java` (7-argument constructor) | `basics/Car` with a Builder | Named values instead of seven positional arguments |
-| `Quiz.java` (two questions commented out) | `basics/JavaQuiz` | All three questions answered and tested |
-| `Main.java`, `inheritance/*` | `inheritance/InheritanceDemo`, `Car`, `SuperCar`, `CarFactory` | Private fields + getters; `SuperCar.getInfo()` returned a placeholder, now builds on `super.getInfo()` |
-| `collections/MyList`, `MySet`, `MyMap`, `MyQueue` | `collections/CollectionExamples` | The old code ignored every return value (`size()`, `peek()`), so it showed nothing |
-| `functionalinterface/FunctionalInterface` | `functional/Greeting` | The old name hid `java.lang.FunctionalInterface` |
-| `LanbdaExpression.java` | lambda in `FunctionalExamples` | File name typo |
-| `task/MetroEngine`, `MetroEngine2` | `functional/MetroEngine` | The two interfaces were identical |
-| `multithreading/ThreadJoin`, `MultiThreading` | `multithreading/ThreadExamples` | **Bug:** the worker created an inner thread but never started it, so nothing ran |
-| `multithreading/RunnableInterface` | `multithreading/CountingTask` | **Bug:** its `Runnable` class was never used; `main` started the `Thread` subclass instead |
-| `Thread.getId()` | thread names | Deprecated since Java 19 |
+| `Car.java`, `Quiz.java`, `Main.java`, `inheritance/*` | Session 1 | Builder for the 7-property car; quiz answers tested; `SuperCar.getInfo()` builds on `super.getInfo()`; factory |
+| `functionalinterface/*`, `collections/*` | Session 3 | Collections examples ignored every return value; `FunctionalInterface` hid `java.lang.FunctionalInterface`; duplicate `MetroEngine2` merged |
+| `multithreading/*` | Session 5 | **Bugs fixed:** `ThreadJoin` never started its worker thread; `RunnableInterface` never used its `Runnable` |
 
 ## License
 
