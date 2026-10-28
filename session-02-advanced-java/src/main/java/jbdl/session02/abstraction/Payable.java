@@ -18,6 +18,12 @@ public interface Payable {
 
     /** Static method: belongs to the interface, called as Payable.totalMonthly(...). */
     static long totalMonthly(List<? extends Payable> payables) {
-        return payables.stream().mapToLong(Payable::monthlyPayInRupees).sum();
+        long total = 0;
+        for (Payable payable : payables) {
+            total += payable.monthlyPayInRupees();
+        }
+        return total;
+        // With streams (Session 4) this is one line:
+        //   payables.stream().mapToLong(Payable::monthlyPayInRupees).sum()
     }
 }

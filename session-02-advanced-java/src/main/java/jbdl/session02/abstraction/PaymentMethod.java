@@ -15,7 +15,10 @@ public sealed interface PaymentMethod permits PaymentMethod.Card, PaymentMethod.
     record Cash() implements PaymentMethod {
     }
 
-    /** Pattern matching with instanceof: test the type and bind a typed variable in one step. */
+    /**
+     * Pattern matching with instanceof (Java 16+): test the type and get a typed variable in one step.
+     * The older way needs a cast: if (method instanceof Card) { Card card = (Card) method; ... }
+     */
     static String describe(PaymentMethod method) {
         if (method instanceof Card card) {
             return "card ending " + card.lastFourDigits();

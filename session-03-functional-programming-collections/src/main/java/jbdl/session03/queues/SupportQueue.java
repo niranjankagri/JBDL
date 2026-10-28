@@ -18,6 +18,8 @@ public final class SupportQueue {
     public record Ticket(String title, Severity severity, long sequence) {
     }
 
+    // By severity first; for the same severity, the lower sequence number (earlier ticket) first.
+    // Same as: int c = a.severity().compareTo(b.severity()); return c != 0 ? c : Long.compare(a.sequence(), b.sequence());
     private static final Comparator<Ticket> MOST_URGENT_FIRST =
             Comparator.comparing(Ticket::severity).thenComparingLong(Ticket::sequence);
 

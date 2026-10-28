@@ -17,6 +17,6 @@ public record Order(int id, String customer, String city, Status status, List<It
 
     /** Sum of the line totals (a small stream inside the record). */
     public long total() {
-        return items.stream().mapToLong(Item::total).sum();
+        return items.stream().mapToLong(Item::total).sum(); // = add up item.total() in a for loop
     }
 }

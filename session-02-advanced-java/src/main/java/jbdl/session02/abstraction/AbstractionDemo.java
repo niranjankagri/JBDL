@@ -17,7 +17,9 @@ public final class AbstractionDemo {
                 new Manager("Ravi", 2_400_000, 6),
                 new Invoice("Cloud hosting", 15_000));
         // one loop, three classes: each object runs its own monthlyPayInRupees()
-        payables.forEach(p -> System.out.println(p + " -> monthly " + p.monthlyPayInRupees()));
+        for (Payable p : payables) {
+            System.out.println(p + " -> monthly " + p.monthlyPayInRupees());
+        }
         System.out.println("Total monthly: " + Payable.totalMonthly(payables));
         System.out.println("Manager tax: " + new Manager("Ravi", 2_400_000, 6).taxInRupees());
         System.out.println("Smartphone: " + new SmartPhone().describe());
