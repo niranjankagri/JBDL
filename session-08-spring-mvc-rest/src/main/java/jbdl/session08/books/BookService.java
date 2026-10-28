@@ -21,6 +21,12 @@ public class BookService {
 
     /** All books in id order; author (case-insensitive) filters when given, null means all. */
     public List<Book> findAll(String author) {
+        // Session 4 streams. The same as a loop:
+        //   List<Book> result = new ArrayList<>();
+        //   for (Book book : books.values()) {
+        //       if (author == null || book.author().equalsIgnoreCase(author)) { result.add(book); }
+        //   }
+        //   result.sort(Comparator.comparingLong(Book::id));   // by id, smallest first
         return books.values().stream()
                 .filter(book -> author == null || book.author().equalsIgnoreCase(author))
                 .sorted(Comparator.comparingLong(Book::id))
@@ -54,7 +60,9 @@ public class BookService {
 
     /** PATCH semantics: change only the given field. */
     public Book changePrice(long id, BigDecimal price) {
-        // compute does the read-check-write as one atomic step on the map entry
+        // compute does the read-check-write as one atomic step on the map entry. The simple version
+        //   Book existing = books.get(id); ... books.put(id, existing.withPrice(price));
+        // works for one user, but two requests at the same moment could overwrite each other's change.
         return books.compute(id, (key, existing) -> {
             if (existing == null) {
                 throw new BookNotFoundException(id);
