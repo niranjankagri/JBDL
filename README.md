@@ -17,7 +17,7 @@ One session is added per day, each in its own pull request.
 | 3 | [Java 8 Functional Programming & Collections Overview](session-03-functional-programming-collections/README.md) | Done |
 | 4 | [Java Advanced Features](session-04-java-advanced-features/README.md) | Done |
 | 5 | [Java Concurrency Essentials](session-05-concurrency/README.md) | Done |
-| 6 | Maven Project Management | Planned |
+| 6 | [Maven Project Management](session-06-maven/README.md) | Done |
 | 7 | Maven Plugins | Planned |
 | 8 | Spring MVC Basics & REST API Implementation | Planned |
 | 9 | Spring Boot Advanced Features: AOP, Lombok, logging | Planned |
