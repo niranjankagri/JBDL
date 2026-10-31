@@ -21,6 +21,7 @@
         <module>session-05-concurrency</module>
         <module>session-06-maven</module>
         <module>session-07-maven-plugins</module>
+        <module>session-08-spring-mvc-rest</module>
     </modules>
 
     <properties>
@@ -31,6 +32,9 @@
         <assertj.version>3.27.7</assertj.version>
         <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.6.1</maven-surefire-plugin.version>
+
+        <!-- Spring Boot sessions (8+) import this version's BOM in their own pom.xml -->
+        <spring-boot.version>4.1.2</spring-boot.version>
     </properties>
 
     <dependencyManagement>
@@ -60,12 +64,31 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Builds the runnable Spring Boot jar; activated only by the Spring Boot modules -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
+                    <!-- Keep parameter names in the class files: Spring binds @PathVariable/@RequestParam by them -->
+                    <parameters>true</parameters>
                     <!-- Warnings fail the build, so deprecated calls (like Thread.getId) cannot creep back in -->
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
